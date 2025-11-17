@@ -13,6 +13,8 @@ func Init() *sql.DB {
     d.Exec("CREATE TABLE IF NOT EXISTS invoices(id INTEGER PRIMARY KEY, user TEXT, amount INTEGER, note TEXT)")
     d.Exec("INSERT INTO invoices(user, amount, note) VALUES('alice', 100, 'Service fee')")
     d.Exec("INSERT INTO invoices(user, amount, note) VALUES('admin', 999, 'VIP charge')")
+    d.Exec("CREATE TABLE IF NOT EXISTS contracts(id INTEGER PRIMARY KEY, owner TEXT, title TEXT, content TEXT, status TEXT)")
+    d.Exec("INSERT INTO contracts(owner, title, content, status) VALUES('alice','Demo Contract','<b>Welcome</b>','draft')")
     return d
 }
 

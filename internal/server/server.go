@@ -40,6 +40,13 @@ func (s *Server) routes() {
     s.mux.HandleFunc("/jwtcheck", handlers.JwtCheck())
     s.mux.HandleFunc("/reset", handlers.Reset(s.db))
     s.mux.HandleFunc("/token-none", handlers.TokenNone())
+    s.mux.HandleFunc("/contracts/create", handlers.ContractsCreate(s.db))
+    s.mux.HandleFunc("/contracts/get", handlers.ContractsGet(s.db))
+    s.mux.HandleFunc("/contracts/search", handlers.ContractsSearch(s.db))
+    s.mux.HandleFunc("/contracts/sign", handlers.ContractsSign(s.db))
+    s.mux.HandleFunc("/contracts/assign", handlers.ContractsAssign(s.db))
+    s.mux.HandleFunc("/contracts/upload", handlers.ContractsUpload())
+    s.mux.HandleFunc("/contracts/review", handlers.ContractsReview())
 }
 
 func (s *Server) cors(next http.Handler) http.Handler {
