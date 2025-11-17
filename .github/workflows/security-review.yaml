@@ -16,4 +16,7 @@ jobs:
       - uses: anthropics/claude-code-security-review@main
         with:
           comment-pr: true
-          claude-api-key: ${{ secrets.ANTHROPIC_API_KEY }}
+        env:
+          ANTHROPIC_BASE_URL: https://www.88code.org/api
+          ANTHROPIC_AUTH_TOKEN: ${{ secrets.ANTHROPIC_AUTH_TOKEN }}
+          CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC: 1
