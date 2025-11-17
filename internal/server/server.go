@@ -31,10 +31,12 @@ func (s *Server) routes() {
     s.mux.HandleFunc("/exec", handlers.Exec())
     s.mux.HandleFunc("/proxy", handlers.Proxy())
     s.mux.HandleFunc("/render", handlers.Render())
+    s.mux.HandleFunc("/render2", handlers.Render2())
     s.mux.HandleFunc("/debug", handlers.Debug())
     s.mux.HandleFunc("/redirect", handlers.Redirect())
     s.mux.HandleFunc("/cors", handlers.CorsEcho())
     s.mux.HandleFunc("/ws", handlers.WS())
+    s.mux.HandleFunc("/jwtcheck", handlers.JwtCheck())
 }
 
 func (s *Server) cors(next http.Handler) http.Handler {
