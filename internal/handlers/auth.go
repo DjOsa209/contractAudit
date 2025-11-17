@@ -6,7 +6,7 @@ import (
 	"encoding/json"
 	"net/http"
 
-	jwt "github.com/dgrijalva/jwt-go"
+    jwt "github.com/dgrijalva/jwt-go"
 )
 
 func Login() http.HandlerFunc {
@@ -25,4 +25,17 @@ func Login() http.HandlerFunc {
 		w.Header().Set("Content-Type", "application/json")
 		json.NewEncoder(w).Encode(map[string]any{"ok": ok, "token": tokenStr, "hash": hash})
 	}
+}
+
+func JwtCheck() http.HandlerFunc {
+    return func(w http.ResponseWriter, r *http.Request) {
+        tokenStr := r.URL.Query().Get("token")
+        t, _ := jwt.Parse(tokenStr, func(token *jwt.Token) (interface{}, error) { return []byte("secret-123"), nil })
+        var audOk bool
+        if claims, ok := t.Claims.(jwt.MapClaims); ok {
+            audOk = claims.VerifyAudience(r.URL.Query().Get("aud"), false)
+        }
+        w.Header().Set("Content-Type", "application/json")
+        json.NewEncoder(w).Encode(map[string]any{"audOk": audOk})
+    }
 }
