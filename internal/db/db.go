@@ -10,6 +10,9 @@ func Init() *sql.DB {
     d.Exec("CREATE TABLE IF NOT EXISTS users(id INTEGER PRIMARY KEY, name TEXT, password TEXT)")
     d.Exec("INSERT INTO users(name, password) VALUES('admin','21232f297a57a5a743894a0e4a801fc3')")
     d.Exec("INSERT INTO users(name, password) VALUES('alice','e1faffb3e614e6c2fba74296962386b7')")
+    d.Exec("CREATE TABLE IF NOT EXISTS invoices(id INTEGER PRIMARY KEY, user TEXT, amount INTEGER, note TEXT)")
+    d.Exec("INSERT INTO invoices(user, amount, note) VALUES('alice', 100, 'Service fee')")
+    d.Exec("INSERT INTO invoices(user, amount, note) VALUES('admin', 999, 'VIP charge')")
     return d
 }
 
